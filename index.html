@@ -6,6 +6,8 @@
   <meta name="theme-color" content="#0f172a">
   <title>Workout Timer</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -107,5 +109,11 @@
   </section>
 
   <script src="app.js"></script>
+  <script>
+    // Offline support (see sw.js). Service workers need http(s), not file://.
+    if ("serviceWorker" in navigator && location.protocol !== "file:") {
+      navigator.serviceWorker.register("sw.js");
+    }
+  </script>
 </body>
 </html>

@@ -7,6 +7,11 @@ Plank Timer, Ab Workout and Kegel Timer (which asks: quick ~70 s or long 5 min).
 - `app.js`: the stick-figure drawings, the workout definitions (`WORKOUTS`), the timer and the routing
 - `styles.css`: styles, with light and dark themes
 - `sounds/`: the wood-block tick and the bell
+- `manifest.webmanifest`, `sw.js`, `icons/`: make it an installable, offline
+  web app (PWA). The service worker is network-first, so pushed changes show
+  up on the next load with no version bump. **When you add a file the app
+  needs, add it to `FILES` in `sw.js`** so it's available offline.
+  `icons/*.png` are rendered from `icons/icon.svg` and `icons/icon-maskable.svg`.
 
 ## Mobile first
 
