@@ -29,6 +29,14 @@ but phones come first.
   phone from a distance, so the important things (the countdown, the
   exercise vs. rest state) must be readable at a glance.
 
+## Hosting
+
+The app is hosted on GitHub Pages at
+https://mhenry1384.github.io/Rove-WorkoutTimer/ and redeploys automatically
+(about a minute) on every push to `main`. The user installs it from there as
+an app on their phone, and the installed app picks up pushed changes the next
+time it's opened online.
+
 ## Testing
 
 Add `?test` to the URL (for example `index.html?test#/abs`) to make every
