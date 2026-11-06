@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
+  <title>Workout Timer</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Home: choose a workout -->
+  <section id="screen-home" class="screen">
+    <header class="home-header">
+      <h1>Workout Timer</h1>
+    </header>
+    <nav class="workout-list">
+      <a class="workout-btn" href="#/plank">
+        <span class="workout-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><circle cx="40" cy="18" r="4.5"/><path d="M5 34 L19 29 L32 24 L32 34 L42 34 M19 29 L4 23"/></svg>
+        </span>
+        <span class="workout-text">
+          <span class="workout-name">Plank Timer</span>
+          <span class="workout-meta">5 min &middot; 8 positions</span>
+        </span>
+      </a>
+      <a class="workout-btn" href="#/abs">
+        <span class="workout-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><line x1="4" y1="40" x2="44" y2="40" style="stroke-width:2.5;opacity:.5"/><circle cx="12" cy="18" r="4.5"/><path d="M15 23 Q18 34 27 36 L35 23 L43 36"/></svg>
+        </span>
+        <span class="workout-text">
+          <span class="workout-name">Ab Workout</span>
+          <span class="workout-meta">7 min &middot; 7 exercises</span>
+        </span>
+      </a>
+      <a class="workout-btn" href="#/kegel">
+        <span class="workout-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M4 24 H17 M12 18 L18 24 L12 30 M44 24 H31 M36 18 L30 24 L36 30"/><circle cx="24" cy="24" r="3" style="fill: var(--accent); stroke: none"/></svg>
+        </span>
+        <span class="workout-text">
+          <span class="workout-name">Kegel Timer</span>
+          <span class="workout-meta">Quick (~70 sec) or long (5 min)</span>
+        </span>
+      </a>
+      <a class="workout-btn" href="#/stretch">
+        <span class="workout-icon" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><circle cx="26" cy="15" r="4.5"/><path d="M8 38 L21 22 M8 38 H42 L42 32 M21 22 L40 33"/></svg>
+        </span>
+        <span class="workout-text">
+          <span class="workout-name">Stretch Timer</span>
+          <span class="workout-meta">5 or 10 sets</span>
+        </span>
+      </a>
+    </nav>
+  </section>
+
+  <!-- Choose a version (e.g. quick or long Kegel) -->
+  <section id="screen-choose" class="screen" hidden>
+    <div class="topbar">
+      <a class="back-btn" href="#/" aria-label="Back to workouts">&larr; Back</a>
+      <span id="choose-title" class="topbar-title"></span>
+      <span></span>
+    </div>
+    <p class="subtitle choose-prompt">Which one today?</p>
+    <nav id="choose-list" class="workout-list"></nav>
+  </section>
+
+  <!-- Timer screen (shared by all timed workouts) -->
+  <section id="screen-timer" class="screen" hidden>
+    <div class="topbar">
+      <a id="timer-back" class="back-btn" href="#/" aria-label="Back to workouts">&larr; Back</a>
+      <span id="workout-title" class="topbar-title"></span>
+      <span id="total-remaining" class="topbar-total" title="Total time remaining"></span>
+    </div>
+
+    <div class="stage">
+      <div id="segment-step" class="segment-step"></div>
+      <h2 id="segment-name" class="segment-name"></h2>
+      <p id="segment-desc" class="segment-desc"></p>
+      <div id="up-next" class="up-next"></div>
+      <div id="figure-wrap" class="figure-wrap">
+        <div id="figure" class="figure" aria-hidden="true"></div>
+        <span id="figure-icon" class="figure-icon" aria-hidden="true"></span>
+      </div>
+      <div id="countdown" class="countdown"></div>
+      <div id="next-up" class="next-up"></div>
+    </div>
+
+    <div id="timeline" class="timeline" aria-hidden="true"></div>
+
+    <div class="controls">
+      <button id="btn-restart" class="btn btn-secondary" type="button">Restart</button>
+      <button id="btn-start" class="btn btn-primary" type="button">Start</button>
+    </div>
+  </section>
+
+  <!-- Placeholder for workouts not built yet -->
+  <section id="screen-soon" class="screen" hidden>
+    <div class="topbar">
+      <a class="back-btn" href="#/" aria-label="Back to workouts">&larr; Back</a>
+      <span id="soon-title" class="topbar-title"></span>
+      <span></span>
+    </div>
+    <div class="soon">
+      <p>This workout is coming soon.</p>
+    </div>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>
