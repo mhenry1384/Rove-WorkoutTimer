@@ -219,7 +219,7 @@
       prepSeconds: 5,
       tapToPause: true,
       countExercises: true,
-      countLabel: "Stretch",
+      countLabel: "", // just a big "1 of 10"
       segments: withRests(30, 10, Array.from({ length: sets }, () => (
         { name: "Stretch", pose: "stretch", desc: "Ease into the stretch and hold. Breathe slowly; no bouncing." }
       ))),
@@ -362,9 +362,11 @@
       ...reps(9, () => [sq("Quick Squeeze", 1), rx(1)]),
       sq("Quick Squeeze", 1), rx(10),
     ];
+    // One continuous squeeze (no relax between floors, on purpose); the
+    // "Hold ·" names make that clear on screen.
     const elevator = () => [
-      sq("Floor 1", 3, "lift1"), sq("Floor 2", 3, "lift2"), sq("Top Floor", 4, "lift3"),
-      sq("Down to 2", 3, "lift2"), sq("Down to 1", 3, "lift1"), rx(8),
+      sq("Squeeze · Floor 1", 3, "lift1"), sq("Hold · Floor 2", 3, "lift2"), sq("Hold · Top Floor", 4, "lift3"),
+      sq("Hold · Down to 2", 3, "lift2"), sq("Hold · Down to 1", 3, "lift1"), rx(8),
     ];
 
     return [
@@ -374,7 +376,7 @@
         reps(5, () => [sq("Squeeze & Hold", 10), rx(10)])),                          // 1:40
       ...stage("Quick flicks", "Squeeze hard and fast, then let go completely each time.",
         [...flickSet(), ...flickSet()]),                                             // 0:58
-      ...stage("Elevator", "Tighten a little at a time, floor by floor, then lower slowly one floor at a time.",
+      ...stage("Elevator", "One long squeeze, no letting go: tighten more at each floor, then ease down a floor at a time.",
         [...elevator(), ...elevator()]),                                             // 0:48
       ...stage("Long holds", "Your longest holds. Steady squeeze, slow breaths. If you tire, ease off a little rather than letting go.",
         [sq("Long Hold", 20), rx(12), sq("Long Hold", 20)]),                        // 0:52
@@ -722,6 +724,7 @@
       // Labels
       if (done) {
         els.step.textContent = "Workout complete";
+        els.step.classList.remove("big");
         els.name.textContent = "Nice work!";
         els.desc.textContent = "";
         els.countdown.textContent = "Done";
@@ -729,11 +732,14 @@
         els.upNext.textContent = "";
       } else {
         const segNum = idx - prepOffset + 1;
+        const label = this.workout.countLabel ?? "Exercise";
+        // No label (Stretch): show a bare "1 of 10", larger.
+        els.step.classList.toggle("big", !label && !!this.workout.countExercises && !phase.prep && !phase.rest);
         if (phase.prep) els.step.textContent = "Starting soon";
         else if (this.workout.countExercises) {
           const work = segs.filter((s) => !s.rest);
           const n = segs.slice(0, segNum).filter((s) => !s.rest).length;
-          els.step.textContent = phase.rest ? "" : `${this.workout.countLabel || "Exercise"} ${n} of ${work.length}`;
+          els.step.textContent = phase.rest ? "" : `${label} ${n} of ${work.length}`.trim();
         } else if (phase.group) {
           const groups = [...new Set(segs.map((s) => s.group))];
           els.step.textContent = `${phase.group} \u00b7 ${groups.indexOf(phase.group) + 1} of ${groups.length}`;
